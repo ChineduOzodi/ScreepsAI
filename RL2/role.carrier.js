@@ -48,6 +48,10 @@ var roleCarrier = {
                     creep.moveTo(target);
                 }
             }
+            else{
+                creep.say("task gone");
+                creep.findTask();
+            }
         }
     }
 };
