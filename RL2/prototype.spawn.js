@@ -8,7 +8,7 @@ module.exports = function() {
             var carry = 50;
             var roles = {role: roleName, task: undefined};
 
-            if (roleName == 'harvester' && this.memory.spawnContainerID){
+            if (roleName == 'harvester' && this.memory.spawnContainerID && this.memory.miningContainersID.length > 0){
                 var numberOfParts = Math.floor((energy /( work + carry + carry + carry + move + move + move)));
                 if (numberOfParts == 0){
                     body.push(WORK);
@@ -27,7 +27,7 @@ module.exports = function() {
                     }
                 }
             }
-            else if (roleName == 'carrier' && this.memory.spawnContainerID){
+            else if (roleName == 'carrier'){
                 var numberOfParts = Math.floor((energy /(carry + carry + move)));
 
                 if (numberOfParts == 0){

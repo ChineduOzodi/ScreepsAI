@@ -121,7 +121,7 @@ var manager = {
                 }
             });
 
-            if (harvesters.length < 2 && !spawn.spawning ) {
+            if (harvesters.length < 5 && !spawn.spawning ) {
                 var newName;
                 newName = spawn.createCustomCreap(energy, 'harvester');
                 console.log('Spawning new harvester: ' + newName);
@@ -140,7 +140,7 @@ var manager = {
                 newName = spawn.createCustomCreap(energy, 'upgrader');
                 console.log('Spawning new upgrader: ' + newName);
             }
-            else if (carriers.length < 2 && !spawn.spawning) {
+            else if (carriers.length < 2 && !spawn.spawning && spawn.memory.spawnContainerID && spawn.memory.miningContainersID.length > 0) {
                 var newName;
                 newName = spawn.createCustomCreap(energy, 'carrier');
                 console.log('Spawning new carrier: ' + newName);
