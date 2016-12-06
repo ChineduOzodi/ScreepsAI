@@ -120,8 +120,8 @@ module.exports = function() {
             if (numberOfParts > 7){
                 numberOfParts = 7;
             }
-            else if (numberOfParts == 1){
-                numberOfParts++;
+            else if (numberOfParts <= 1){
+                numberOfParts = 2;
             }
             var body = [];
             for (let i = 0; i < numberOfParts - 1; i++){
