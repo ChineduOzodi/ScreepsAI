@@ -51,7 +51,7 @@ var roleUpgrader = {
                 }
             }
             else{
-                var source = creep.pos.findClosestByPath(FIND_SOURCES);
+                var source = creep.pos.findClosestByPath(FIND_SOURCES, {filter: (s) => { return s.energy != 0;}});
                 if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(source);
                 }

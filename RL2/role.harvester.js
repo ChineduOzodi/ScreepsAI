@@ -20,6 +20,15 @@ var roleHarvester = {
                         structure.store[RESOURCE_ENERGY] > 0;
                 }
             });
+            var source = creep.pos.findClosestByPath(FIND_SOURCES,{filter: (s) => {return (s.energy != 0);}});
+            //console.log(target);
+            if (target && source){
+                var selected = creep.pos.findClosestByPath([target,source]);
+
+                if (selected.id == source.id){
+                    target = null;
+                }
+            }
             if (target){
 
                 if (creep.pos.getRangeTo(target) <= 1){
@@ -31,7 +40,7 @@ var roleHarvester = {
                 }
             }
             else {
-                var source = creep.pos.findClosestByPath(FIND_SOURCES,{filter: (s) => {return (s.energy != 0);}});
+
                 if (source) {
                     if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(source);

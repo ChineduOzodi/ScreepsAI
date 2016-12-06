@@ -121,7 +121,7 @@ var manager = {
                 }
             });
 
-            if (harvesters.length < 5 && !spawn.spawning ) {
+            if (harvesters.length < 2 && !spawn.spawning ) {
                 var newName;
                 newName = spawn.createCustomCreap(energy, 'harvester');
                 console.log('Spawning new harvester: ' + newName);
@@ -130,8 +130,8 @@ var manager = {
                 var newName;
                 newName = spawn.createCustomCreap2(spawn,energy,'miner',spawn.memory.miningContainersID[spawn.memory.miningIndex]);
                 spawn.memory.miningIndex++;
-                if (spawn.memory.sourcesIndex >= spawn.memory.miningContainersID.length){
-                    spawn.memory.sourcesIndex = 0;
+                if (spawn.memory.miningIndex >= spawn.memory.miningContainersID.length){
+                    spawn.memory.miningIndex = 0;
                 }
                 console.log('Spawning new miner: ' + newName);
             }

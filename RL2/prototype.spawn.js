@@ -128,6 +128,7 @@ module.exports = function() {
                 body.push(WORK);
             }
             body.push(MOVE);
+            console.log(task);
             this.memory.spawnIndex++;
             return this.createCreep(body,roleName + '-' + this.memory.spawnIndex, {role: roleName, task: task});
         }
