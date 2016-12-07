@@ -5,7 +5,7 @@ var roleMiner = {
         var target = Game.getObjectById(creep.memory.task);
         //console.log("target:" + target);
         
-        if(creep.room.name != Game.spawns.Spawn1.name){
+        if(creep.room.name != Game.spawns.Spawn1.room.name){
 	        creep.moveTo(Game.spawns.Spawn1);
 	    } 
         else if (target) {

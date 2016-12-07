@@ -14,7 +14,7 @@ var roleRepairer = {
 	        creep.say('repairing');
 	    }
 	    
-	    if(creep.room.name != Game.spawns.Spawn1.name){
+	    if(creep.room.name != Game.spawns.Spawn1.room.name){
 	        creep.moveTo(Game.spawns.Spawn1);
 	    } 
 	    else if(creep.memory.repairing) {

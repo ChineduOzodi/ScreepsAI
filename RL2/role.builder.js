@@ -13,7 +13,7 @@ var roleBuilder = {
 	        creep.memory.building = true;
 	        creep.say('building');
 	    }
-	    if(creep.room.name != Game.spawns.Spawn1.name){
+	    if(creep.room.name != Game.spawns.Spawn1.room.name){
 	        creep.moveTo(Game.spawns.Spawn1);
 	    } 
 	    else if(creep.memory.building) {
