@@ -120,8 +120,8 @@ module.exports = function() {
             if (numberOfParts > 7){
                 numberOfParts = 7;
             }
-            else if (numberOfParts == 1){
-                numberOfParts++;
+            else if (numberOfParts <= 1){
+                numberOfParts = 2;
             }
             var body = [];
             for (let i = 0; i < numberOfParts - 1; i++){
@@ -159,7 +159,7 @@ module.exports = function() {
                         structure.store[RESOURCE_ENERGY] > 0 && structure.id != this.memory.spawnContainerID;
                 }
             });
-            //var sources = this.room.find(FIND_DROPPED_ENERGY);
+            var sources = this.room.find(FIND_DROPPED_ENERGY);
 
 
             var targetIds = [];
@@ -168,11 +168,11 @@ module.exports = function() {
 
                 targetIds.push(target.id);
             }
-            //for (var name in sources){
-            //    var target = sources[name];
+            for (var name in sources){
+                var target = sources[name];
 
-             //   targetIds.push(target.id);
-            //}
+                targetIds.push(target.id);
+            }
             this.memory.carryTasks = targetIds;
             //console.log(targets.length);
 

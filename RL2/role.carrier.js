@@ -13,10 +13,8 @@ var roleCarrier = {
             creep.memory.task = undefined;
             creep.say('carrying');
         }
-        if(creep.room.name != Game.spawns.Spawn1.room.name){
-	        creep.moveTo(Game.spawns.Spawn1);
-	    } 
-	    else if(creep.memory.carrying) {
+
+        if(creep.memory.carrying) {
 
             var target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                 filter: (structure) => {
@@ -44,15 +42,9 @@ var roleCarrier = {
                 //console.log(creep.pos.getRangeTo(target.pos.x, target.pos.y));
                 if (creep.pos.getRangeTo(target) <= 1){
                     creep.withdraw(target,RESOURCE_ENERGY);
-                    var source = creep.pos.findClosestByPath(FIND_DROPPED_ENERGY)
-
-                    if (source){
-                        creep.pickup(source);
-                    }
                     //console.log(target);
                 }
                 else {
-                    creep.say("movetotarget");
                     creep.moveTo(target);
                 }
             }

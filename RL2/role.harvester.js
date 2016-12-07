@@ -11,10 +11,8 @@ var roleHarvester = {
             creep.memory.harvesting = true;
             creep.say('harvesting');
         }
-        if(creep.room.name != Game.spawns.Spawn1.room.name){
-	        creep.moveTo(Game.spawns.Spawn1);
-	    } 
-        else if (creep.memory.harvesting){
+        
+        if (creep.memory.harvesting){
             var target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_CONTAINER ||

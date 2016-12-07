@@ -17,6 +17,7 @@ var manager = {
 
             spawn.findMiningContainers();
 
+
             if (spawn.memory.miningContainersID.length < sources.length){
                 //Create container structures
                 for (var name in sources){
@@ -73,10 +74,13 @@ var manager = {
             spawn.setTasks('carrier');
 
             //Links
-            if (spawn.room.level > 3){
-                var resourceLink = Game.getObjectById('6bd0c61a1d96f35');
-            var controllerLink = Game.getObjectById('2256c6b0c240e1f')
-            resourceLink.transferEnergy(controllerLink);
+            if (spawn.room.controller.level > 3){
+                //console.log('working');
+                var resourceLink = spawn.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: (s) => { return s.structureType == STRUCTURE_LINK;}});
+                var controllerLink = spawn.room.controller.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: (s) => { return s.structureType == STRUCTURE_LINK;}});
+                resourceLink.transferEnergy(controllerLink);
             }
             
 
@@ -88,22 +92,20 @@ var manager = {
                     filter: (structure) => structure.hits < structure.hitsMax && (structure.structureType != STRUCTURE_WALL)
                 });
                 //console.log(closestDamagedStructure);
-                
+                if(closestDamagedStructure) {
+
+                  tower.repair(closestDamagedStructure);
+                }
 
                 var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
                 if(closestHostile) {
                     tower.attack(closestHostile);
-                }
-                else if(closestDamagedStructure) {
-
-                  tower.repair(closestDamagedStructure);
                 }
             }
 
             var level = spawn.room.controller.level;
 
             var energy = spawn.room.energyAvailable;
-            var maxEnergy = spawn.room.energyCapacityAvailable;
             var upgradeLevel1 = 500;
 
             var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
@@ -130,7 +132,7 @@ var manager = {
             }
             else if (miners.length < spawn.memory.miningContainersID.length && level > 1 && !spawn.spawning) {
                 var newName;
-                newName = spawn.createCustomCreap2(spawn,maxEnergy,'miner',spawn.memory.miningContainersID[spawn.memory.miningIndex]);
+                newName = spawn.createCustomCreap2(spawn,energy,'miner',spawn.memory.miningContainersID[spawn.memory.miningIndex]);
                 spawn.memory.miningIndex++;
                 if (spawn.memory.miningIndex >= spawn.memory.miningContainersID.length){
                     spawn.memory.miningIndex = 0;
@@ -157,7 +159,7 @@ var manager = {
                 newName = spawn.createCustomCreap(energy, 'repairer');
                 console.log('Spawning new repairer: ' + newName);
             }
-            else if (attackers.length < 1 && !spawn.spawning) {
+            else if (attackers.length < 2 && !spawn.spawning) {
                 var newName;
                 newName = spawn.createCustomCreap(energy, 'attacker');
                 console.log('Spawning new attacker: ' + newName);
