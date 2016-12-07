@@ -11,8 +11,10 @@ var roleUpgrader = {
             creep.memory.upgrading = true;
             creep.say('upgrading');
         }
-
-        if(creep.memory.upgrading) {
+        if(creep.room.name != Game.spawns.Spawn1.name){
+	        creep.moveTo(Game.spawns.Spawn1);
+	    } 
+        else if(creep.memory.upgrading) {
             if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
                 /**
                 var road = creep.room.lookForAt(STRUCTURE_ROAD, creep);

@@ -88,20 +88,22 @@ var manager = {
                     filter: (structure) => structure.hits < structure.hitsMax && (structure.structureType != STRUCTURE_WALL)
                 });
                 //console.log(closestDamagedStructure);
-                if(closestDamagedStructure) {
-
-                  tower.repair(closestDamagedStructure);
-                }
+                
 
                 var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
                 if(closestHostile) {
                     tower.attack(closestHostile);
+                }
+                else if(closestDamagedStructure) {
+
+                  tower.repair(closestDamagedStructure);
                 }
             }
 
             var level = spawn.room.controller.level;
 
             var energy = spawn.room.energyAvailable;
+            var maxEnergy = spawn.room.energyCapacityAvailable;
             var upgradeLevel1 = 500;
 
             var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
@@ -128,7 +130,7 @@ var manager = {
             }
             else if (miners.length < spawn.memory.miningContainersID.length && level > 1 && !spawn.spawning) {
                 var newName;
-                newName = spawn.createCustomCreap2(spawn,energy,'miner',spawn.memory.miningContainersID[spawn.memory.miningIndex]);
+                newName = spawn.createCustomCreap2(spawn,maxEnergy,'miner',spawn.memory.miningContainersID[spawn.memory.miningIndex]);
                 spawn.memory.miningIndex++;
                 if (spawn.memory.miningIndex >= spawn.memory.miningContainersID.length){
                     spawn.memory.miningIndex = 0;

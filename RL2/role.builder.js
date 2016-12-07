@@ -13,8 +13,10 @@ var roleBuilder = {
 	        creep.memory.building = true;
 	        creep.say('building');
 	    }
-
-	    if(creep.memory.building) {
+	    if(creep.room.name != Game.spawns.Spawn1.name){
+	        creep.moveTo(Game.spawns.Spawn1);
+	    } 
+	    else if(creep.memory.building) {
 
 	        var buildFlag = creep.pos.findClosestByPath(FIND_FLAGS,{filter: (s) => {return (s.name == "BuildFlag" );}});
             var target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
