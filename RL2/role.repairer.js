@@ -13,8 +13,11 @@ var roleRepairer = {
 	        creep.memory.repairing = true;
 	        creep.say('repairing');
 	    }
-
-	    if(creep.memory.repairing) {
+	    
+	    if(creep.room.name != Game.spawns.Spawn1.room.name){
+	        creep.moveTo(Game.spawns.Spawn1);
+	    } 
+	    else if(creep.memory.repairing) {
 	        var structure = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                         filter: (s) => {return ((s.structureType == STRUCTURE_WALL) && s.hits < 10000)
                             || (s.structureType == STRUCTURE_ROAD && s.hits/s.hitsMax < .9) ;
